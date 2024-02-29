@@ -52,11 +52,6 @@ class Solution:
             res.append(level)
         
         return res
-    
-
-x = Solution()
-root  = x.create_tree([1,2,3,4,5], 0)
-x.levelOrder(root)
-        
+            
 # @lc code=end
 
