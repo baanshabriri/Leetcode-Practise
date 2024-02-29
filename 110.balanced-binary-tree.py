@@ -1,20 +1,19 @@
 #
-# @lc app=leetcode id=111 lang=python3
+# @lc app=leetcode id=110 lang=python3
 #
-# [111] Minimum Depth of Binary Tree
+# [110] Balanced Binary Tree
 #
 
 # @lc code=start
 # Definition for a binary tree node.
-from typing import Optional, List
+from typing import Optional
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
-
-
 class Solution:
+
     def create_tree(self, arr, index):
         if index < len(arr):
             if arr[index] is None:
@@ -25,27 +24,26 @@ class Solution:
             root.right = self.create_tree(arr, 2 * index + 2)
             return root
         
-    def minDepth(self, root: Optional[TreeNode]) -> int:
-        if not root: 
+
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
+        
+        return self.height(root) != -1
+    
+    def height(self, root: Optional[TreeNode]) -> bool:
+
+        if not root:
             return 0
         
-        if root.left is None:
-            return 1 + self.minDepth(root.right)
+        left = self.height(root.left)
+        right = self.height(root.right)
+
+        if left == -1 or right == -1 or abs(left - right) > 1:
+            return -1 
         
-        if root.right is None:
-            return 1 + self.minDepth(root.left)
+        return max(left, right) + 1 #actual height of the tree
         
-        return 1 + min(self.minDepth(root.left), self.minDepth(root.right))
-        
-
-
-x = Solution()
-root = x.create_tree([3,9,20,None,None,15,7], 0)
-print(x.minDepth(root))
-
-
-            
-
-        
+                
 # @lc code=end
 
