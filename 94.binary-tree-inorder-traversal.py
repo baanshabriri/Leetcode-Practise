@@ -24,26 +24,37 @@ class Solution:
             root.left = self.create_tree(arr, 2 * index + 1)
             root.right = self.create_tree(arr, 2 * index + 2)
             return root
-        
+
+    def inOrder(self, node, result):
+        if not node:
+            return result
+        else:
+            self.inOrder(node.left, result)
+            result.append(node.val)
+            self.inOrder(node.right, result)
+
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         
         if not root:
             return []        
         
         res = []
-        stack = []
-        node = root
 
-        while node or stack:
-            while node:
-                stack.append(node)
-                node = node.left
-
-            node = stack.pop()
-            res.append(node.val)
-            node = node.right
-        
+        self.inOrder(root, res)
         return res
+        # stack = []
+        # node = root
+
+        # while node or stack:
+        #     while node:
+        #         stack.append(node)
+        #         node = node.left
+
+        #     node = stack.pop()
+        #     res.append(node.val)
+        #     node = node.right
+        
+        # return res
 
 
 
